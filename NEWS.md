@@ -1,3 +1,11 @@
+## miclust 1.2.8
+
+### Minor changes:
+
+* Update deprecated code in CITATION.
+
+<hr style="border:2px solid gray"> </hr>
+
 ## miclust 1.2.7
 
 ### Minor changes:

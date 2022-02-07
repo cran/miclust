@@ -1,6 +1,6 @@
-61cf9324ed3c32231854ee4c3643f68c *DESCRIPTION
+5a5bc7d56ef26a444b727408d5163db3 *DESCRIPTION
 b1d88f8ef9eb29bc068144d409963f49 *NAMESPACE
-a5b6270e7db22ef16261af2d42cdea76 *NEWS.md
+fd1ac2a10a1ed3df376efd834be551f4 *NEWS.md
 ee2dac4c7b52b8f04d3ff176c882b645 *R/assignprobandkappas.R
 5352aee31034b48f0d5be0a050e1fc7b *R/centerdata.R
 428ebb04051877cec0b164d2a224d69d *R/centroid.R
@@ -27,8 +27,8 @@ f4fc960efbd6c0654c89071de515285c *R/minhanes.R
 ae4b296dfc393f2166d7face9fa5d087 *R/standardizedata.R
 61aa70ebd2e53b73965b9edc037ed651 *R/summary.miclust.R
 0c00ead860e948c3d7e9a1d9eccd5ffe *README.md
-7e6d0907731b5f561771b2b3a376a6a1 *data/minhanes.RData
-e5c56f62e25ff9e37b116b2483df4c3d *inst/CITATION
+be9712f8aa578217ea88c714d0efb911 *data/minhanes.RData
+e8dad5381cf5f311fae9a6614af681e8 *inst/CITATION
 a97f757b092abbb4fd1216f948c6297b *man/assignprobandkappas.Rd
 9c8b9dfa9fee5fa28923ad8ff1d87ef7 *man/centerdata.Rd
 7379ffb5b7d72d04993dc8bdcb067587 *man/centroid.Rd

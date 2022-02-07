@@ -1,7 +1,7 @@
 Package: miclust
 Type: Package
 Title: Multiple Imputation in Cluster Analysis
-Version: 1.2.7
+Version: 1.2.8
 Authors@R: c(person(given = "Jose", family = "Barrera-Gomez", role = c("aut", "cre"), email = "jose.barrera@isglobal.org",
                     comment = c(ORCID = "0000-0002-2688-6036")),
              person(given = "Xavier", family = "Basagana", role = "aut", email = "xavier.basagana@isglobal.org",
@@ -17,13 +17,14 @@ Depends: R (>= 4.1)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Suggests: knitr, rmarkdown,
+Suggests: knitr, xtable, rmarkdown
 Imports: doBy, combinat, flexclust, graphics, irr, matrixStats, stats,
         utils
 Author: Jose Barrera-Gomez [aut, cre] (<https://orcid.org/0000-0002-2688-6036>),
   Xavier Basagana [aut] (<https://orcid.org/0000-0002-8457-1489>)
 Maintainer: Jose Barrera-Gomez <jose.barrera@isglobal.org>
+RoxygenNote: 7.1.2
 NeedsCompilation: no
-Packaged: 2021-09-22 11:17:20 UTC; jbarrera
+Packaged: 2022-02-07 17:00:17 UTC; jbarrera
 Repository: CRAN
-Date/Publication: 2021-09-22 12:00:02 UTC
+Date/Publication: 2022-02-07 17:20:02 UTC
