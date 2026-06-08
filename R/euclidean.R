@@ -4,7 +4,7 @@
 #' @param x internally provided by \code{miclust} function.
 #' @param centers internally provided by \code{miclust} function.
 #' @return internal value to be used by \code{miclust} function.
-#' @keywords internal
+#' @noRd
 #' @importFrom matrixStats colSums2
 euclidean <- function(x, centers) {
   z <- matrix(0, nrow = nrow(x), ncol = nrow(centers))

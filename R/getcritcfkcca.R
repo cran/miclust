@@ -5,7 +5,7 @@
 #' @param inertiapower internally provided by \code{doclusterkmeans} function.
 #' @return internal value to be used by \code{doclusterkmeans} function.
 #' @importFrom flexclust info
-#' @keywords internal
+#' @noRd
 getcritcfkcca <- function(kmeansfitted, inertiapower) {
   k <- dim(kmeansfitted@centers)[1]
   m <- dim(kmeansfitted@centers)[2]

@@ -11,7 +11,7 @@
 #' @param centpos internally provided by \code{miclust} function.
 #' @param initcl internally provided by \code{miclust} function.
 #' @return internal value to be used by \code{miclust} function.
-#' @keywords internal
+#' @noRd
 doclusterkmeans <- function(search, data, k, metriccent, inertiapower = 1,
                             maxvars = NULL, centpos, initcl) {
   if (search == "forward") {

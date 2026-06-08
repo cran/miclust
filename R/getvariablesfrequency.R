@@ -1,16 +1,17 @@
 #' Calculates the ranked selection frequency of the variables.
 #'
 #' Creates a ranked selection frequency for all the variables that have been
-#'   selected at least once along the analyzed imputed data sets. \code{getvariablesfrequency}
-#'   can be useful for customizing the plot of these frequencies as it is shown
-#'   in Examples below.
-#' @param x an object of class \code{miclust} obtained with the function \code{\link{miclust}}.
-#' @param k the number of clusters. The default value is the optimal number of clusters
-#'   obtained by the function \code{\link{miclust}}.
+#'   selected at least once along the analysed imputed datasets.
+#'   \code{getvariablesfrequency} can be useful for customizing the plot of
+#'   these frequencies as it is shown in Examples below.
+#' @param x an object of class \code{miclust} obtained with the function
+#'   \code{\link{miclust}}.
+#' @param k the number of clusters. The default value is the optimal number of
+#'   clusters obtained by the function \code{\link{miclust}}.
 #' @return A list including the following items:
 #'  \describe{
-#'    \item{percfreq}{vector of the selection frequencies (percentage of times) of the
-#'      variables in decreasing order.}
+#'    \item{percfreq}{vector of the selection frequencies (percentage of times)
+#'      of the variables in decreasing order.}
 #'    \item{varnames}{names of the variables.}
 #'   }
 #' @export
@@ -24,13 +25,13 @@ getvariablesfrequency <- function(x, k = NULL) {
   if (x$search == "none")
     stop("Argument object 'search' in 'x' cannot be 'none'.")
 
-  if (class(k) != "NULL" && !is.na(k) && (((length(k) != 1L) || (k < 2) || (floor(k) != ceiling(k)))))
+  if ((!inherits(k, "NULL")) && !is.na(k) && (((length(k) != 1L) || (k < 2) || (floor(k) != ceiling(k)))))
     stop("The number of clusters, 'k', must be an integer greater than 1.")
 
-  if (class(k) != "NULL" && !is.na(k) && (k > x$kmax))
+  if ((!inherits(k, "NULL")) && !is.na(k) && (k > x$kmax))
     stop(paste0("The number of clusters, 'k', cannot be greater than the maximum explored number of clusters, ", x$kmax, "."))
 
-  if (class(k) == "NULL" || is.na(k))
+  if (inherits(k, "NULL") || is.na(k))
     k <- x$kfin
 
   selectedvars <- list()

@@ -1,22 +1,26 @@
 #' Computes probabilities of (relabeled) cluster and kappas.
 #'
-#' \code{assignprobandkappas} returns a list with information on probabilities of
-#'   cluster belonging and Cohen's kappas.
+#' assignprobandkappas.
+#'
+#' Returns a list with information on probabilities of cluster belonging and
+#'   Cohen's kappas.
 #' @param variables internally provided by \code{summary.miclust}.
 #' @param k internally provided by \code{summary.miclust}.
 #' @param metriccent internally provided by \code{summary.miclust}.
 #' @param data internally provided by \code{summary.miclust}.
 #' @param initialcluster internally provided by \code{summary.miclust}.
 #' @return internal value to be used by \code{summary.miclust}.
-#' @keywords internal
+#' @noRd
 #' @importFrom flexclust kcca predict
 assignprobandkappas <- function(variables, k, metriccent, data, initialcluster) {
   res <- NULL
   dat <- data[[1]][, variables]
-  if (class(dat) == "numeric") {
+  if (inherits(dat, "numeric")) {
     dat <- as.data.frame(dat)
     names(dat) <- variables
   }
+  ### kcca() gives an error if initialcluster does not contain observations
+  ### in some cluster:
   mod <- kcca(x = dat, k = initialcluster, family = metriccent, simple = TRUE)
   n <- dim(data[[1]])[1]
   m <- length(data)
@@ -25,7 +29,7 @@ assignprobandkappas <- function(variables, k, metriccent, data, initialcluster) 
   kappas <- rep(NA, m - 1)
   for (i in 2:m) {
     dat <- data[[i]][, variables]
-    if (class(dat) == "numeric") {
+    if (inherits(dat, "numeric")) {
       dat <- as.data.frame(dat)
       names(dat) <- variables
     }

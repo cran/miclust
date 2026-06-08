@@ -5,7 +5,7 @@
 #' @param data internally provided by \code{doclusterkmeans} function.
 #' @param ncentr internally provided by \code{doclusterkmeans} function.
 #' @return internal value to be used by \code{doclusterkmeans} function.
-#' @keywords internal
+#' @noRd
 #' @importFrom stats runif
 #' @importFrom matrixStats colMins colMaxs
 getinitialcentroids <- function(data, ncentr) {

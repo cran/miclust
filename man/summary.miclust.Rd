@@ -2,58 +2,68 @@
 % Please edit documentation in R/summary.miclust.R
 \name{summary.miclust}
 \alias{summary.miclust}
+\alias{print.summary.miclust}
 \title{Summarizes the results.}
 \usage{
 \method{summary}{miclust}(object, k = NULL, quantilevars = NULL, ...)
+
+\method{print}{summary.miclust}(x, digits = 2, ...)
 }
 \arguments{
 \item{object}{object of class \code{miclust} obtained with the function \code{\link{miclust}}.}
 
-\item{k}{number of clusters. The default value is the optimal number of clusters
-obtained by \code{\link{miclust}}.}
+\item{k}{number of clusters. The default value is the optimal number of
+clusters obtained by \code{\link{miclust}}.}
 
-\item{quantilevars}{numeric. If a variable selection procedure was used, the
-cut-off percentile in order to decide the number of selected variables in the
-variable reduction procedure by decreasing order of presence along the imputations
-results. The default value is \code{quantilevars} = 0.5, i.e., the number of
-selected variables is the median number of selected variables along the imputations.}
+\item{quantilevars}{numeric. If a variable selection procedure was used,
+the cut-off percentile in order to decide the number of selected variables
+in the variable reduction procedure by decreasing order of presence along
+the imputations results. The default value is \code{quantilevars} = 0.5,
+i.e., the number of selected variables is the median number of selected
+variables along the imputations.}
 
-\item{\dots}{further arguments for the plot function.}
+\item{\dots}{further arguments for \code{summary} and \code{print.summary}
+methods.}
+
+\item{x}{for the \code{print.summary} method, an object obtained with the
+method \code{summary}.}
+
+\item{digits}{digits for the \code{print.summary} method. Default is 2.}
 }
 \value{
-An object with classes c("list", "summary.miclust") including the following items:
+A \code{list} including the following items:
  \describe{
-   \item{allocationprobabilities}{if imputations were analyzed, descriptive
+   \item{allocationprobabilities}{if imputations were analysed, descriptive
      summary of the probability of cluster assignment.}
-   \item{classmatrix}{if imputations were analyzed, the individual probabilities
-     of cluster assignment.}
-   \item{cluster}{if imputations were analyzed, the final individual cluster
+   \item{classmatrix}{if imputations were analysed, the individual
+     probabilities of cluster assignment.}
+   \item{cluster}{if imputations were analysed, the final individual cluster
      assignment.}
-   \item{clusterssize}{if imputations were analyzed, size of the imputed
+   \item{clusterssize}{if imputations were analysed, size of the imputed
      cluster and between-imputations summary of the cluster size.}
-   \item{clustervector}{if a single data set (raw data set) has been clustered,
-     a vector containing the individuals cluster assignments.}
-   \item{clustervectors}{if imputed data sets have been clustered, the individual
-     cluster assignment in each imputation.}
-   \item{completecasesperc}{if a single data set (raw data set) has been
-     clustered, the percentage of complete cases in the data set.}
+   \item{clustervector}{if a single dataset (raw dataset) has been
+     clustered, a vector containing the individuals cluster assignments.}
+   \item{clustervectors}{if imputed datasets have been clustered, the
+     individual cluster assignment in each imputation.}
+   \item{completecasesperc}{if a single dataset (raw dataset) has been
+     clustered, the percentage of complete cases in the dataset.}
    \item{k}{number of clusters.}
-   \item{kappas}{if imputations were analyzed, the Cohen's kappa values after
+   \item{kappas}{if imputations were analysed, the Cohen's kappa values after
      comparing the cluster vector in the first imputation with the cluster
      vector in each of the remaining imputations.}
    \item{kappadistribution}{a summary of \code{kappas}.}
-   \item{m}{number of imputations used in the descriptive analysis which is the
-     total number of imputations provided.}
+   \item{m}{number of imputations used in the descriptive analysis which is
+     the total number of imputations provided.}
    \item{quantilevars}{if variable selection was performed, the input value
      of \code{quantilevars}.}
    \item{search}{search algorithm for the selection variable procedure.}
    \item{selectedvariables}{if variable selection was performed, the selected
      variables obtained considering \code{quantilevars}.}
-   \item{selectedvarspresence}{if imputations were analyzed and variable
+   \item{selectedvarspresence}{if imputations were analysed and variable
      selection was performed, the presence of the selected variables along
      imputations.}
-   \item{summarybycluster}{within-cluster descriptive analysis of the selected
-     variables.}
+   \item{summarybycluster}{within-cluster descriptive analysis of the
+     selected variables.}
    \item{usedimp}{indicator of imputations used in the clustering procedure.}
   }
 }
@@ -65,5 +75,5 @@ Performs a within-cluster descriptive analysis of the variables after the
 ### see examples in miclust.
 }
 \seealso{
-\code{\link{miclust}}, \code{\link{plot.miclust}}.
+\code{\link{miclust}}.
 }

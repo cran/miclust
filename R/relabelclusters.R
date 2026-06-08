@@ -1,11 +1,11 @@
 #' Relabel clusters.
 #'
 #' \code{relabelclusters} relabels the clusters so that they all have the same
-#'   meaning in the all the data sets.
+#'   meaning in the all the datasets.
 #' @param refcluster internally provided by \code{assignprobandkappas} function.
 #' @param cluster internally provided by \code{assignprobandkappas} function.
 #' @return internal value to be used by \code{assignprobandkappas} function.
-#' @keywords internal
+#' @noRd
 relabelclusters <- function(refcluster, cluster) {
   res <- NULL
   k <- length(table(refcluster))
@@ -19,10 +19,14 @@ relabelclusters <- function(refcluster, cluster) {
                      auxcluster <- rep(NA, n)
                      for (j in 1:k)
                        auxcluster[cluster == j] <- x[j]
-                     irr::kappa2(ratings = cbind(refcluster, auxcluster),
-                                 weight = "equal")$value
-                     }
-                   )
+                     ### OLD until 1.2.8 (before irr is archived):
+                     # irr::kappa2(ratings = cbind(refcluster, auxcluster),
+                     #             weight = "equal")$value
+                     ### NEW from 1.3.0 (after removing irr dependency)
+                     ### and using my own internal function "kappaunweighted":
+                     kappaunweighted(x = cbind(refcluster, auxcluster))
+                   }
+  )
   kappas <- unlist(kappas)
   id <- which(kappas == max(kappas))
   if (length(id) > 1)

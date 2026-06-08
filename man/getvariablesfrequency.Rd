@@ -7,24 +7,25 @@
 getvariablesfrequency(x, k = NULL)
 }
 \arguments{
-\item{x}{an object of class \code{miclust} obtained with the function \code{\link{miclust}}.}
+\item{x}{an object of class \code{miclust} obtained with the function
+\code{\link{miclust}}.}
 
-\item{k}{the number of clusters. The default value is the optimal number of clusters
-obtained by the function \code{\link{miclust}}.}
+\item{k}{the number of clusters. The default value is the optimal number of
+clusters obtained by the function \code{\link{miclust}}.}
 }
 \value{
 A list including the following items:
  \describe{
-   \item{percfreq}{vector of the selection frequencies (percentage of times) of the
-     variables in decreasing order.}
+   \item{percfreq}{vector of the selection frequencies (percentage of times)
+     of the variables in decreasing order.}
    \item{varnames}{names of the variables.}
   }
 }
 \description{
 Creates a ranked selection frequency for all the variables that have been
-  selected at least once along the analyzed imputed data sets. \code{getvariablesfrequency}
-  can be useful for customizing the plot of these frequencies as it is shown
-  in Examples below.
+  selected at least once along the analysed imputed datasets.
+  \code{getvariablesfrequency} can be useful for customizing the plot of
+  these frequencies as it is shown in Examples below.
 }
 \examples{
 ### see examples in miclust.

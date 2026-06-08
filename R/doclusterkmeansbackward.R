@@ -9,7 +9,7 @@
 #' @param centpos internally provided by \code{doclusterkmeans} function.
 #' @param initcl internally provided by \code{doclusterkmeans} function.
 #' @return internal value to be used by \code{doclusterkmeans} function.
-#' @keywords internal
+#' @noRd
 #' @importFrom stats hclust dist
 doclusterkmeansbackward <- function(data, k, metriccent, inertiapower = 1,
                                     centpos, initcl) {
@@ -36,8 +36,8 @@ doclusterkmeansbackward <- function(data, k, metriccent, inertiapower = 1,
   while (sum(duplicated(initialcentroids)) > 0)
     initialcentroids <- getinitialcentroids(data, k)
   colnames(initialcentroids) <- names(data)
-  mod <- flexclust::kcca(x = data, k = as.matrix(initialcentroids),
-                         family = metriccent, simple = TRUE)
+  mod <- kcca(x = data, k = as.matrix(initialcentroids), family = metriccent,
+              simple = TRUE)
   clusters[[p - notscannedvariables + 1]] <- mod@cluster
   maxcritcfvector[p - notscannedvariables + 1] <- getcritcfkcca(mod, inertiapower = inertiapower)
   initialcentroids <- mod@centers
@@ -57,8 +57,8 @@ doclusterkmeansbackward <- function(data, k, metriccent, inertiapower = 1,
           inicentroids <- initialcentroids[, selectedset[-i]]
           while (sum(!duplicated(inicentroids)) < k)
             inicentroids <- getinitialcentroids(dat, k)
-          mod <- flexclust::kcca(x = dat, k = as.matrix(inicentroids),
-                                 family = metriccent, simple = TRUE)
+          mod <- kcca(x = dat, k = as.matrix(inicentroids), family = metriccent,
+                      simple = TRUE)
           auxclusters[[i]] <- mod@cluster
           critcfvector[i] <- getcritcfkcca(mod, inertiapower = inertiapower)
         }

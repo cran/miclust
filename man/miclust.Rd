@@ -2,7 +2,9 @@
 % Please edit documentation in R/miclust.R
 \name{miclust}
 \alias{miclust}
-\title{Cluster analysis in multiple imputed data sets with optional variable
+\alias{print.miclust}
+\alias{plot.miclust}
+\title{Cluster analysis in multiple imputed datasets with optional variable
   selection.}
 \usage{
 miclust(
@@ -18,60 +20,104 @@ miclust(
   verbose = TRUE,
   seed = NULL
 )
+
+\method{print}{miclust}(x, ...)
+
+\method{plot}{miclust}(
+  x,
+  k = NULL,
+  metric = c("all", "nclfreq", "critcf", "nvarfreq", "varsel"),
+  col.nclfreq = "gray",
+  col.critcf = "gray",
+  col.nvarfreq = "gray",
+  col.varsel = "black",
+  col.all = NULL,
+  ...
+)
 }
 \arguments{
 \item{data}{object of class \code{midata} obtained with the function \code{\link{getdata}}.}
 
 \item{method}{clustering method. Currently, only \code{"kmeans"} is accepted.}
 
-\item{search}{search algorithm for the selection variable procedure: \code{"backward"},
-\code{"forward"} or \code{"none"}. If \code{"none"} (default), no variable selection
-is performed.}
+\item{search}{search algorithm for the selection variable procedure:
+\code{"backward"}, \code{"forward"} or \code{"none"}. If \code{"none"}
+(default), no variable selection is performed.}
 
-\item{ks}{the values of the explored number of clusters. Default is exploring 2 and 3
-clusters.}
+\item{ks}{the values of the explored number of clusters. Default is exploring
+2 and 3 clusters.}
 
-\item{maxvars}{if \code{method = "forward"}, the maximum number of variables to be
-selected.}
+\item{maxvars}{if \code{method = "forward"}, the maximum number of variables
+to be selected.}
 
-\item{usedimp}{numeric. Which imputed data sets must be included in the cluster
-analysis. If \code{NULL} (default), all available imputed data sets are included.
-If \code{usedimp} is numeric (or a numeric vector), its values indicate which imputed
-data sets are included.}
+\item{usedimp}{numeric. Which imputed datasets must be included in the
+cluster analysis. If \code{NULL} (default), all available imputed datasets
+are included. If \code{usedimp} is numeric (or a numeric vector), its values
+indicate which imputed datasets are included.}
 
-\item{distance}{two metrics are allowed to compute distances: \code{"manhattan"}
-(default) and \code{"euclidean"}.}
+\item{distance}{two metrics are allowed to compute distances:
+\code{"manhattan"} (default) and \code{"euclidean"}.}
 
 \item{centpos}{position computation of the cluster centroid. If \code{"means"}
-(default) the position of the centroid is computed by the mean. If \code{"medians"},
-by the median.}
+(default) the position of the centroid is computed by the mean. If
+\code{"medians"}, by the median.}
 
-\item{initcl}{starting values for the clustering algorithm. If \code{"rand"}, they are
-randomly selected; if \code{"hc"}, they are computed via hierarchical clustering. See
-Details below.}
+\item{initcl}{starting values for the clustering algorithm. If \code{"rand"},
+they are randomly selected; if \code{"hc"}, they are computed via
+hierarchical clustering. See Details below.}
 
-\item{verbose}{a logical value indicating output status messages. Default is \code{TRUE}.}
+\item{verbose}{a logical value indicating output status messages. Default is
+\code{TRUE}.}
 
-\item{seed}{a number. Seed for reproducibility of results. Default is \code{NULL} (no
-seed).}
+\item{seed}{a number. Seed for reproducibility of results. Default is
+\code{NULL} (no seed).}
+
+\item{x}{for \code{print.miclust} and \code{plot.miclust}, an object of
+class \code{miclust} obtained with the function \code{\link{miclust}}.}
+
+\item{\dots}{further arguments for \code{print.miclust} and \code{plot.miclust}.}
+
+\item{k}{for \code{plot.miclust}, number of clusters. The default value is
+the optimal number of clusters obtained by \code{\link{miclust}}.}
+
+\item{metric}{for \code{plot.miclust}, metrics to be represented. \code{"all"}
+(default, corresponding to the output provided by version 1.2.8 and earlier
+represents all metrics. Other options are: \code{"nclfreq"} (percentage of
+times each number of clusters has been selected); \code{"critcf"} (critCF
+distribution for each number of clusters); \code{"nvarfreq"} (distribution
+of the number of selected variables), and \code{"varsel"} (percentage of
+appearance of the variables that remained in the final set of selected
+variables).}
+
+\item{col.nclfreq, col.critcf, col.nvarfreq, col.varsel}{for \code{plot.miclust},
+a character string or integer specifying the color for each specific
+\code{metric}. They control the color of the bars in the cluster frequency
+plot (\code{"nclfreq"}), the boxes in the CritCF plot (\code{"critcf"}),
+the bars in the variable frequency plot (\code{"nvarfreq"}), and the
+segments in the variable selection plot (\code{"varsel"}). Defaults are
+\code{"gray"} for all cases but \code{"black"} for \code{"varsel"}.}
+
+\item{col.all}{An optional character string or integer specifying a global
+color. If provided, it overrides all specific color arguments listed above,
+applying the same color across all subplots. Defaults to \code{NULL}.}
 }
 \value{
 A list with class "miclust" including the following items:
  \describe{
    \item{clustering}{a list of lists containing the results of the clustering algorithm
-    for each analyzed data set and for each analyzed number of clusters. Includes
+    for each analyzed dataset and for each analyzed number of clusters. Includes
     information about selected variables and the cluster vector.}
    \item{completecasesperc}{if \code{data} contains a single data frame, percentage
     of complete cases in \code{data}.}
    \item{data}{input \code{data}.}
    \item{ks}{the values of the explored number of clusters.}
-   \item{usedimp}{indicator of the imputed data sets used.}
+   \item{usedimp}{indicator of the imputed datasets used.}
    \item{kfin}{optimal number of clusters.}
    \item{critcf}{if \code{data} contains a single data frame, \code{critcf} contains
     the optimal (maximum) value of CritCF (see Details) and the number of selected
     variables in the reduction procedure for each explored number of clusters. If
     \code{data} is a list, \code{critcf} contains the optimal value of CritCF for
-    each imputed data set and for each explored value of the number of clusters.}
+    each imputed dataset and for each explored value of the number of clusters.}
    \item{numberofselectedvars}{number of selected variables.}
    \item{selectedkdistribution}{if \code{data} is a list, frequency of selection of
     each analyzed number of clusters.}
@@ -86,13 +132,13 @@ A list with class "miclust" including the following items:
   }
 }
 \description{
-Performs cluster analysis in multiple imputed data sets with optional variable
+Performs cluster analysis in multiple imputed datasets with optional variable
   selection. Results can be summarized and visualized with the \code{summary}
   and \code{plot} methods.
 }
 \details{
-The optimal number of clusters and the final set of variables are selected
- according to CritCF. CritCF is defined as
+The optimal number of clusters and the final set of variables are
+ selected according to CritCF. CritCF is defined as
  \deqn{CritCF = \left(\frac{2m}{2m + 1} \cdot \frac{1}{1 + W / B}\right)^{\frac{1 + \log_2(k + 1)}{1 + \log_2(m + 1)}},}
  where \eqn{m} is the number of variables, \eqn{k} is the number of clusters,
  and \eqn{W} and \eqn{B} are the within- and between-cluster inertias. Higher
@@ -156,7 +202,7 @@ summary(minhanes2clust)
 ###
 ### Example 3:
 ###
-### Complete case clustering process with backward variable selection
+### Complete cases clustering process with backward variable selection
 ###
 ##################
 
@@ -166,7 +212,7 @@ nhanes2clust
 
 summary(nhanes2clust)
 
-### nothing to plot for a single data set analysis
+### nothing to plot for a single dataset analysis
 # plot(nhanes2clust)
 
 ##################

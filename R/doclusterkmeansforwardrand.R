@@ -9,7 +9,7 @@
 #' @param maxvars internally provided by \code{doclusterkmeans} function.
 #' @param centpos internally provided by \code{doclusterkmeans} function.
 #' @return internal value to be used by \code{doclusterkmeans} function.
-#' @keywords internal
+#' @noRd
 doclusterkmeansforwardrand <- function(data, k, metriccent, inertiapower = 1,
                                        maxvars, centpos) {
   selectedset <- NULL
@@ -32,8 +32,8 @@ doclusterkmeansforwardrand <- function(data, k, metriccent, inertiapower = 1,
           names(dat) <- c(selectedset, candidateset[i])
           cluster <- sample(x = 1:k, size = nrow(dat), replace = TRUE)
           initialcentroids <- centroid(data = dat, cluster = cluster, centpos = centpos)
-          mod <- flexclust::kcca(x = dat, k = as.matrix(initialcentroids),
-                                 family = metriccent, simple = TRUE)
+          mod <- kcca(x = dat, k = as.matrix(initialcentroids), family = metriccent,
+                      simple = TRUE)
           auxclusters[[i]] <- mod@cluster
           critcfvector[i] <- getcritcfkcca(mod, inertiapower = inertiapower)
         }

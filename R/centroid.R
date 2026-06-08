@@ -1,15 +1,15 @@
 #' Computes centroid.
 #'
-#' \code{centroid} computes the centroid for each cluster (mean o median).
+#' Computes the centroid for each cluster (mean o median).
 #' @param data internally provided by \code{doclusterkmeans} function.
 #' @param cluster internally provided by \code{doclusterkmeans} function.
 #' @param centpos internally provided by \code{doclusterkmeans} function.
 #' @return internal value to be used by \code{doclusterkmeans} function.
-#' @keywords internal
+#' @noRd
 centroid <- function(data, cluster, centpos) {
   ncluster <- length(levels(as.factor(cluster)))
 
-  if (class(data) == "numeric")
+  if (inherits(data, "numeric"))
     data <- as.matrix(data)
   centroid <- matrix(NA, nrow = ncluster, ncol = dim(data)[2])
 

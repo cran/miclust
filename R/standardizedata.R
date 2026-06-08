@@ -1,9 +1,9 @@
 #' Standardize data.
 #'
-#' \code{standardizedata} standardizes variables in data.
+#' Standardizes variables in data.
 #' @param data internally provided by \code{getdata} function.
 #' @return internal value to be used by \code{getdata} function.
-#' @keywords internal
+#' @noRd
 #' @importFrom stats sd
 standardizedata <- function(data) {
   xs <- as.matrix(centerdata(data))

@@ -24,7 +24,7 @@ available using the `help` function:
 ``` r
 library(miclust)
 #> 
-#> This is miclust 1.2.6. For details, use:
+#> This is miclust 1.3.0. For details, use:
 #> > help(package = 'miclust')
 #> 
 #> To cite the methods in the package use:
@@ -39,20 +39,21 @@ help(miclust)
 
 ### Data
 
-Data `minhanes` is a list with 101 data sets. The first data set
-contains `nhanes`data from the `mice` package. The remaining data sets
-were obtained by applying the multiple imputation function `mice`, from
-the same package. The first step of the analysis is to apply the
-`getdata` function to `minhanes`, resulting in `minhanes1`, a list with
-two objects: `rawdata`, a `data.frame` containing the raw data, and
-`impdata`, a `list` containing the imputed data sets. `getdata`
+Data `minhanes` is a list with 101 datasets. The first dataset contains
+`nhanes`data from the `mice` package. The remaining datasets were
+obtained by applying the multiple imputation function `mice`, from the
+same package. The first step of the analysis is to apply the `getdata`
+function to `minhanes`, resulting in `minhanes1`, a list with two
+objects: `rawdata`, a `data.frame` containing the raw data, and
+`impdata`, a `list` containing the imputed datasets. `getdata`
 standardizes all variables, so categorical variables need to have
 numeric values. Standardization is performed by centering all variables
 at the mean and then dividing by the standard deviation (or the
 difference between the maximum and the minimum values for binary
-variables). Such a standardization is applied only to the imputed data
-sets, except in the case of analyzing just the raw data (i.e. complete
-cases analysis), in which raw data are also internally standardized.
+variables). Such a standardization is applied only to the imputed
+datasets, except in the case of analyzing just the raw data
+(i.e. complete cases analysis), in which raw data are also internally
+standardized.
 
 ``` r
 library(miclust)
@@ -91,7 +92,7 @@ minhanes1$rawdata
 #> 24   3 24.9   1  NA
 #> 25   2 27.4   1 186
 
-### first (standardized) imputed data set:
+### first (standardized) imputed dataset:
 minhanes1$impdata[[1]]
 #>           age        bmi   hyp        chl
 #> 1  -0.9149325  2.0012331 -0.24 -0.1489984
@@ -129,15 +130,16 @@ Multiple imputation clustering process with backward variable selection:
 ### using only the imputations 1 to 50 for the clustering process and exploring
 ### 2 vs. 3 clusters:
 minhanes1clust <- miclust(data = minhanes1, search = "backward", ks = 2:3, usedimp = 1:50, seed = 4321)
-#> ....imp 5....imp 10....imp 15....imp 20....imp 25....imp 30....imp 35....imp 40....imp 45....imp 50
-#> 
+#> . . . . imp  5 . . . . imp 10 . . . . imp 15 . . . . imp 20 
+#> . . . . imp 25 . . . . imp 30 . . . . imp 35 . . . . imp 40 
+#> . . . . imp 45 . . . . imp 50 
 #>  Analysis done.
 minhanes1clust
 #> 
 #>    Results using 50 imputations:
 #> ------------------------------------------------
 #> 
-#>                                      k=V1  k=V2
+#>                                       k=2   k=3
 #> Frequency of selection (%)          56.00 44.00
 #> Median number of selected variables   1.0   2.0
 ### optimal number of clusters
@@ -160,7 +162,7 @@ plot(y$percfreq, type = "h", main = "", xlab = "Variable", ylab = "Percentage of
 axis(1, at = 1:length(y$varnames), labels = y$varnames)
 ```
 
-<img src="man/figures/README-ex1selvar-1.png" width="60%" style="display: block; margin: auto;" />
+<img src="man/figures/README-ex1selvar-1.png" alt="" width="576" style="display: block; margin: auto;" />
 
 Graphical representation of the results:
 
@@ -168,17 +170,17 @@ Graphical representation of the results:
 plot(minhanes1clust)
 ```
 
-<img src="man/figures/README-ex1plot-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-ex1plot-1.png" alt="" width="672" style="display: block; margin: auto;" />
 
-Default summary for the optimal number of clusters:
+Summary for the optimal number of clusters:
 
 ``` r
 summary(minhanes1clust)
 #> Warning in summary.miclust(minhanes1clust): 'quantilevars' not provided. Setting it to 0.5.
 #> 
 #> Results using:
-#>     50 imputed data sets for the cluster analysis
-#>     100 imputed data sets for the descriptive summary
+#>     50 imputed datasets for the cluster analysis
+#>     100 imputed datasets for the descriptive summary
 #>     2 as the final number of clusters
 #> -----------------------------------------------------------
 #> 
@@ -206,65 +208,16 @@ summary(minhanes1clust)
 #> Assigned to cluster 1 0.51 0.54  1  1   1
 #> Assigned to cluster 2 0.52 0.93  1  1   1
 #> 
-#> Within-cluster summary (100 imputations):
-#>     %miss. %miss.(cl.1) %miss.(cl.2) mean (cl.1) sd (cl.1) mean (cl.2)
-#> hyp      0            0            0           2         0           1
-#>     sd (cl.2)
-#> hyp         0
-```
-
-Summary forcing 3 clusters:
-
-``` r
-summary(minhanes1clust, k = 3)
-#> Warning in summary.miclust(minhanes1clust, k = 3): 'quantilevars' not provided. Setting it to 0.5.
-#> 
-#> Results using:
-#>     50 imputed data sets for the cluster analysis
-#>     100 imputed data sets for the descriptive summary
-#>     3 as the final number of clusters
-#> -----------------------------------------------------------
-#> 
-#> Presence of the variables in the subset of selected variables:
-#>   Variable Presence(%)
-#> 1      hyp          96
-#> 2      age          94
-#> 3      bmi          46
-#> 4      chl          30
-#> 
-#> Selected variables:
-#> [1] "hyp" "age"
-#> 
-#> Cohen's kappa between-imputations distribution (99 comparisons):
-#>  2.5%   25%   50%  mean   75% 97.5% 
-#>     1     1     1     1     1     1 
-#> 
-#> Between-imputation clusters size distribution (100 imputations):
-#>           size min. 2.5% 25% 50% mean 75% 97.5% max.
-#> cluster 1   12   12   12  12  12   12  12    12   12
-#> cluster 2    7    7    7   7   7    7   7     7    7
-#> cluster 3    6    6    6   6   6    6   6     6    6
-#> 
-#> Probability of assignment to the cluster distribution (100 imputations):
-#>                       min Q1 Q2 Q3 max
-#> Assigned to cluster 1   1  1  1  1   1
-#> Assigned to cluster 2   1  1  1  1   1
-#> Assigned to cluster 3   1  1  1  1   1
-#> 
-#> Within-cluster summary (100 imputations):
-#>          %miss. %miss.(cl.1) %miss.(cl.2) %miss.(cl.3) mean (cl.1) sd (cl.1)
-#> hyp.mean      0            0            0            0           1         0
-#> age.mean      0            0            0            0           1         0
-#>          mean (cl.2) sd (cl.2) mean (cl.3) sd (cl.3)
-#> hyp.mean         1.4      0.55         1.5      0.58
-#> age.mean         2.0      0.00         3.0      0.00
+#> Within-cluster summary (100 imputations) [%miss.;mean;sd]:
+#>     %miss.            cl.1            cl.2
+#> hyp     32 42.86;2.00;0.00 27.78;1.00;0.00
 ```
 
 ## References
 
 The methodology used in the package is described in
 
--   Basagaña X, Barrera-Gómez J, Benet M, Antó JM, Garcia-Aymerich J. *A
-    Framework for Multiple Imputation in Cluster Analysis*. American
-    Journal of Epidemiology. 2013;177(7):718-725.
-    <a href="https://doi.org/10.1093/aje/kws289" target="_blank">https://doi.org/10.1093/aje/kws289</a>
+- Basagaña X, Barrera-Gómez J, Benet M, Antó JM, Garcia-Aymerich J. *A
+  Framework for Multiple Imputation in Cluster Analysis*. American
+  Journal of Epidemiology. 2013;177(7):718-725.
+  <a href="https://doi.org/10.1093/aje/kws289" target="_blank">https://doi.org/10.1093/aje/kws289</a>

@@ -10,7 +10,7 @@
 #' @param centpos internally provided by \code{doclusterkmeans} function.
 #' @param initcl internally provided by \code{doclusterkmeans} function.
 #' @return internal value to be used by \code{doclusterkmeans} function.
-#' @keywords internal
+#' @noRd
 doclusterkmeansforward <- function(data, k, metriccent, inertiapower = 1,
                                    maxvars, centpos, initcl) {
   ###############################

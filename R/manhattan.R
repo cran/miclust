@@ -1,10 +1,10 @@
-#' Computes Manhattan distance.
+#' Manhattan distance.
 #'
-#' \code{manhattan} computes the Manhattan distance from data to centers.
+#' Computes the Manhattan distance from data to centers.
 #' @param x internally provided by \code{miclust} function.
 #' @param centers internally provided by \code{miclust} function.
 #' @return internal value to be used by \code{miclust} function.
-#' @keywords internal
+#' @noRd
 #' @importFrom matrixStats colSums2
 manhattan <- function(x, centers) {
   z <- matrix(0, nrow = nrow(x), ncol = nrow(centers))
